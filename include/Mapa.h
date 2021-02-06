@@ -5,20 +5,19 @@
 
 using namespace std;
 
-class Mapa 
-{
+class Mapa {
     private:
         int numColunas;
         int numLinhas;
         char **mapa;
-        FILE *arquivo_mapa;
+        FILE *arquivoMapa;
 
     public:
         Mapa(FILE *arq_mapa);
         ~Mapa();
-        void defineTamanhoMapa();
-        void alocaMapa();
-        void preencheMapa();
-        void imprimeMapa();
+        void DefineTamanhoMapa();
+        void AlocaMapa();
+        void PreencheMapa();
+        void ImprimeMapa();
 
 };

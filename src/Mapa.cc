@@ -3,19 +3,19 @@
 using namespace std;
 
 Mapa::Mapa(FILE *arq_mapa) {
-    arquivo_mapa = arq_mapa;
-    defineTamanhoMapa();
-    alocaMapa();
-    preencheMapa();
-    imprimeMapa();
+    arquivoMapa = arq_mapa;
+    DefineTamanhoMapa();
+    AlocaMapa();
+    PreencheMapa();
+    ImprimeMapa();
 }
 
-void Mapa::defineTamanhoMapa(){
-    fscanf(arquivo_mapa, "%d", &numLinhas);
-    fscanf(arquivo_mapa, "%d", &numColunas);
+void Mapa::DefineTamanhoMapa(){
+    fscanf(arquivoMapa, "%d", &numLinhas);
+    fscanf(arquivoMapa, "%d", &numColunas);
 }
 
-void Mapa::alocaMapa(){
+void Mapa::AlocaMapa(){
     mapa = (char **) malloc (sizeof(char *) * numLinhas);
     for(int i = 0; i < numLinhas; i++){
         mapa[i] = (char *) malloc (sizeof(char) * numColunas);
@@ -23,13 +23,13 @@ void Mapa::alocaMapa(){
 }
 
 
-void Mapa::preencheMapa(){
+void Mapa::PreencheMapa(){
     char item;
-    while(!feof(arquivo_mapa)){
+    while(!feof(arquivoMapa)){
         for(int i = 0; i < numLinhas; i++){
             for(int j = 0; j < numColunas; j++){
-                if(!feof(arquivo_mapa)){
-                    fscanf(arquivo_mapa, " %c", &item);
+                if(!feof(arquivoMapa)){
+                    fscanf(arquivoMapa, " %c", &item);
                     mapa[i][j] = item;
                 }
 
@@ -38,7 +38,7 @@ void Mapa::preencheMapa(){
     }
 }
 
-void Mapa::imprimeMapa(){
+void Mapa::ImprimeMapa(){
     for(int i = 0; i < numLinhas; i++){
         for(int j = 0; j < numColunas; j++){
             printf("%c", mapa[i][j]);
