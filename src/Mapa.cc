@@ -20,12 +20,6 @@ void Mapa::alocaMapa(){
     for(int i = 0; i < numLinhas; i++){
         mapa[i] = (char *) malloc (sizeof(char) * numColunas);
     }
-
-        for(int i = 0; i < numLinhas; i++){
-        for(int j = 0; j < numColunas; j++){
-            mapa[i][j] = '.';
-        }
-    }
 }
 
 
