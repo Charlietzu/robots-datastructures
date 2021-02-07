@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
         arquivo_comandos = fopen(argv[2], "rt");
         
         Mapa* mapa = new Mapa(arquivo_mapa);
-        ListaComando* listaComando = new ListaComando(arquivo_comandos);
+        ListaComando* listaComando = new ListaComando(arquivo_comandos, argv[2]);
     }
 
     return 0;
