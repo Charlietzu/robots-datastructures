@@ -11,5 +11,6 @@ class ListaComando {
     public:
         ListaComando(FILE *arq_comandos, string nomeArquivo);
         void DelegaOrdens();
+        void AnalisaComando(string linha);
         ~ListaComando();
 };

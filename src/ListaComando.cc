@@ -17,8 +17,11 @@ void ListaComando::DelegaOrdens(){
     arquivo.open(nomeArquivoComando, ios::in);
     
     while(getline(arquivo, linha)){
-        cout << linha << endl;
+        AnalisaComando(linha);
     }
+}
+
+void ListaComando::AnalisaComando(string linha){
 }
 
 ListaComando::~ListaComando() {}
