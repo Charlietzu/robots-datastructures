@@ -11,8 +11,13 @@ class ListaComando {
 
     public:
         ListaComando(FILE *arq_comandos, string nomeArquivo);
+        ~ListaComando();
         void DelegaOrdens(Robo* robos);
         void AnalisaComando(string linha, Robo* robos);
-        ~ListaComando();
+        void AnalisaOrdensDiretas(string linha);
+        void AnalisaOrdensComando(string linha);
+        string VerificaDigitoRobo(string linha, int pos);
+        string VerificaDigitoColuna(string linha);
+        string VerificaDigitoLinha(string linha);
         bool VerificaNumero(string str);
 };
