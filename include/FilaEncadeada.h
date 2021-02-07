@@ -1,3 +1,6 @@
+#ifndef FILAENCADEADA_H
+#define FILAENCADEADA_H
+
 #include "Ordem.h"
 #include "CelulaFila.h"
 
@@ -11,8 +14,12 @@ class FilaEncadeada {
         void Enfileira(Ordem ordem);
         Ordem Desenfileira();
         void Limpa();
+        void InsereInicio(Ordem ordem);
+
     private:
         int tamanho;
         CelulaFila* frente;
         CelulaFila* tras;
 };
+
+#endif

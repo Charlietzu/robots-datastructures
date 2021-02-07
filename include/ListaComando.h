@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string>
+#include "Robo.h"
 
 using namespace std;
 
@@ -10,7 +11,8 @@ class ListaComando {
 
     public:
         ListaComando(FILE *arq_comandos, string nomeArquivo);
-        void DelegaOrdens();
-        void AnalisaComando(string linha);
+        void DelegaOrdens(Robo* robos);
+        void AnalisaComando(string linha, Robo* robos);
         ~ListaComando();
+        bool VerificaNumero(string str);
 };

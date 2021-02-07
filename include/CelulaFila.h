@@ -1,4 +1,8 @@
+#ifndef CELULAFILA_H
+#define CELULAFILA_H
+
 #include "Ordem.h"
+
 
 class CelulaFila {
     public:
@@ -10,3 +14,5 @@ class CelulaFila {
 
     friend class FilaEncadeada;
 };
+
+#endif

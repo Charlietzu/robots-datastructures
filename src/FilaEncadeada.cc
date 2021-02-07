@@ -57,3 +57,17 @@ int FilaEncadeada::GetTamanho(){
 bool FilaEncadeada::Vazia(){
     return tamanho == 0;
 }
+
+void FilaEncadeada::InsereInicio(Ordem ordem) {
+    CelulaFila* nova;
+
+    nova = new CelulaFila();
+    nova->ordem = ordem;
+    nova->prox = frente->prox;
+    frente->prox = nova;
+    tamanho++;
+
+    if(nova->prox == NULL){
+        tras = nova;
+    }    
+}

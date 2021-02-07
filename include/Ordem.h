@@ -11,7 +11,7 @@ class Ordem {
     private:
         int chave;
         string tarefa;
-        string tipoOrdem;
+        int tipoOrdem; //1 é ordem direta e 2 é ordem de comando
         int posicaoLinha;
         int posicaoColuna;
         int robo;
@@ -23,9 +23,16 @@ class Ordem {
         ~Ordem();
 
         void SetChave(int chave);
+        void SetTarefa(string tarefa);
+        void SetTipoOrdem(int tipo);
+        void SetPosicaoLinha(int linha);
+        void SetPosicaoColuna(int coluna);
+        void SetRobo(int codigoRobo);
+        void SetPrioridade(bool valor);
+        void ImprimeOrdem();
 
         string GetTarefa();
-        string GetTipoOrdem();
+        int GetTipoOrdem();
         int GetPosicaoLinha();
         int GetPosicaoColuna();
         int GetRobo();

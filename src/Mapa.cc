@@ -7,7 +7,6 @@ Mapa::Mapa(FILE *arq_mapa) {
     DefineTamanhoMapa();
     AlocaMapa();
     PreencheMapa();
-    ImprimeMapa();
 }
 
 void Mapa::DefineTamanhoMapa(){
