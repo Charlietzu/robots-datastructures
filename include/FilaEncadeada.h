@@ -11,10 +11,10 @@ class FilaEncadeada {
 
         int GetTamanho();
         bool Vazia();
-        void Enfileira(Ordem ordem);
-        Ordem Desenfileira();
+        void Enfileira(Ordem* ordem);
+        Ordem* Desenfileira();
         void Limpa();
-        void InsereInicio(Ordem ordem);
+        void InsereInicio(Ordem* ordem);
 
     private:
         int tamanho;

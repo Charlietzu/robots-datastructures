@@ -17,7 +17,16 @@ class Robo {
         int GetPosicaoLinha();
         int GetPosicaoColuna();
         void ImprimeRobo();
-        void ExecutaOrdemDireta(Ordem ordem);
+        void ProcessaComando(Ordem* ordem);
+        void ExecutaComando(Ordem* ordem);
+        void InsereOrdemSemPrioridade(Ordem* ordem);
+        void InsereOrdemComPrioridade(Ordem* ordem);
+        int GetTamanhoFila();
+        Ordem* RemoveExecutaItemFila();
+        int GetAliensEliminados();
+        int GetRecursosColetados();
+        void adicionaAlienEliminado();
+        void adicionaRecursosColetados();
 
     private:
         int codigoRobo;
@@ -25,6 +34,8 @@ class Robo {
         int posicaoLinha;
         FilaEncadeada filaComandos;
         bool ativo;
+        int aliensEliminados;
+        int recursosColetados;
 };
 
 #endif

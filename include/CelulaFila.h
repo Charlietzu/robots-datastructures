@@ -9,7 +9,7 @@ class CelulaFila {
         CelulaFila();
 
     private:
-        Ordem ordem;
+        Ordem* ordem;
         CelulaFila *prox;
 
     friend class FilaEncadeada;

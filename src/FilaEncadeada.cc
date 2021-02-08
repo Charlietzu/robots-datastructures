@@ -11,7 +11,7 @@ FilaEncadeada::~FilaEncadeada() {
     delete frente;
 }
 
-void FilaEncadeada::Enfileira(Ordem ordem){
+void FilaEncadeada::Enfileira(Ordem* ordem){
     CelulaFila *novaCelula;
 
     novaCelula = new CelulaFila();
@@ -21,9 +21,9 @@ void FilaEncadeada::Enfileira(Ordem ordem){
     tamanho++;
 }
 
-Ordem FilaEncadeada::Desenfileira(){
+Ordem* FilaEncadeada::Desenfileira(){
     CelulaFila *celula;
-    Ordem aux;
+    Ordem* aux;
 
     if(tamanho == 0) {
         throw "Fila está vazia!";
@@ -58,7 +58,7 @@ bool FilaEncadeada::Vazia(){
     return tamanho == 0;
 }
 
-void FilaEncadeada::InsereInicio(Ordem ordem) {
+void FilaEncadeada::InsereInicio(Ordem* ordem) {
     CelulaFila* nova;
 
     nova = new CelulaFila();

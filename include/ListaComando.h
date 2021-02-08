@@ -14,8 +14,7 @@ class ListaComando {
         ~ListaComando();
         void DelegaOrdens(Robo* robos);
         void AnalisaComando(string linha, Robo* robos);
-        void AnalisaOrdensDiretas(string linha);
-        void AnalisaOrdensComando(string linha);
+        Ordem* AnalisaOrdem(string linha);
         string VerificaDigitoRobo(string linha, int pos);
         string VerificaDigitoColuna(string linha);
         string VerificaDigitoLinha(string linha);

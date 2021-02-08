@@ -60,22 +60,30 @@ string ListaComando::VerificaDigitoLinha(string linha){
 
 
 void ListaComando::AnalisaComando(string linha, Robo* robos){
-    AnalisaOrdensDiretas(linha);
-    AnalisaOrdensComando(linha);
+    Ordem* ordem = AnalisaOrdem(linha);
+
+    if(ordem->GetTipoOrdem() == 1){
+        robos[ordem->GetRobo()].ProcessaComando(ordem);
+    } else {
+        if(!ordem->GetPrioridade()){
+            robos[ordem->GetRobo()].InsereOrdemSemPrioridade(ordem);
+        } else {
+            robos[ordem->GetRobo()].InsereOrdemComPrioridade(ordem);
+        }
+    }
 }
 
-void ListaComando::AnalisaOrdensDiretas(string linha) {
+Ordem* ListaComando::AnalisaOrdem(string linha) {
+    Ordem* ordem = new Ordem();
     if(linha.find("ATIVAR") != string::npos){
         string numeroRoboStr = VerificaDigitoRobo(linha, 7);
         if(VerificaNumero(numeroRoboStr)){
             int numeroRobo = stoi(numeroRoboStr);
             if(numeroRobo >= 0 && numeroRobo < 50){
-                Ordem* ordem = new Ordem();
                 ordem->SetTarefa(linha.substr(0,6));
                 ordem->SetTipoOrdem(1);
                 ordem->SetRobo(numeroRobo);
                 ordem->SetPrioridade(true);
-                ordem->ImprimeOrdem();
             }
         }
     } else if(linha.find("EXECUTAR") != string::npos){
@@ -83,12 +91,10 @@ void ListaComando::AnalisaOrdensDiretas(string linha) {
         if(VerificaNumero(numeroRoboStr)){
             int numeroRobo = stoi(numeroRoboStr);
             if(numeroRobo >= 0 && numeroRobo < 50){
-                Ordem* ordem = new Ordem();
                 ordem->SetTarefa(linha.substr(0,8));
                 ordem->SetTipoOrdem(1);
                 ordem->SetRobo(numeroRobo);
                 ordem->SetPrioridade(true);
-                ordem->ImprimeOrdem();
             }
         }
     } else if(linha.find("RELATORIO") != string::npos){
@@ -96,12 +102,10 @@ void ListaComando::AnalisaOrdensDiretas(string linha) {
         if(VerificaNumero(numeroRoboStr)){
             int numeroRobo = stoi(numeroRoboStr);
             if(numeroRobo >= 0 && numeroRobo < 50){
-                Ordem* ordem = new Ordem();
                 ordem->SetTarefa(linha.substr(0,9));
                 ordem->SetTipoOrdem(1);
                 ordem->SetRobo(numeroRobo);
                 ordem->SetPrioridade(true);
-                ordem->ImprimeOrdem();
             }
         }
     } else if(linha.find("RETORNAR") != string::npos){
@@ -109,20 +113,20 @@ void ListaComando::AnalisaOrdensDiretas(string linha) {
         if(VerificaNumero(numeroRoboStr)){
             int numeroRobo = stoi(numeroRoboStr);
             if(numeroRobo >= 0 && numeroRobo < 50){
-                Ordem* ordem = new Ordem();
                 ordem->SetTarefa(linha.substr(0,8));
                 ordem->SetTipoOrdem(1);
                 ordem->SetRobo(numeroRobo);
                 ordem->SetPrioridade(true);
-                ordem->ImprimeOrdem();
             }
         }
-    } 
-}
+    }
 
-void ListaComando::AnalisaOrdensComando(string linha) {
+    bool prioridade = false;
+    if(linha[0] == '*'){
+        prioridade = true;
+    }
     if(linha.find("MOVER") != string::npos){
-        string numeroRoboStr = VerificaDigitoRobo(linha, 6);
+        string numeroRoboStr = prioridade ? VerificaDigitoRobo(linha, 7) : VerificaDigitoRobo(linha, 6);
         string numeroColunaStr = VerificaDigitoColuna(linha);
         string numeroLinhaStr = VerificaDigitoLinha(linha);
         if(VerificaNumero(numeroRoboStr) && VerificaNumero(numeroColunaStr)){
@@ -130,18 +134,38 @@ void ListaComando::AnalisaOrdensComando(string linha) {
             int numeroColuna = stoi(numeroColunaStr);
             int numeroLinha = stoi(numeroLinhaStr);
             if(numeroRobo >= 0 && numeroRobo < 50){
-                Ordem* ordem = new Ordem();
-                ordem->SetTarefa(linha.substr(0,5));
+                ordem->SetTarefa(prioridade? linha.substr(1,5) : linha.substr(0,5));
                 ordem->SetPosicaoColuna(numeroColuna);
                 ordem->SetPosicaoLinha(numeroLinha);
                 ordem->SetTipoOrdem(2);
                 ordem->SetRobo(numeroRobo);
-                ordem->SetPrioridade(true);
-                ordem->ImprimeOrdem();
+                ordem->SetPrioridade(prioridade);
             }
         }
-    } 
+    } else if(linha.find("COLETAR") != string::npos) {
+        string numeroRoboStr = prioridade ? VerificaDigitoRobo(linha, 9) : VerificaDigitoRobo(linha, 8);
+        if(VerificaNumero(numeroRoboStr)){
+            int numeroRobo = stoi(numeroRoboStr);
+            if(numeroRobo >= 0 && numeroRobo < 50){
+                ordem->SetTarefa(prioridade ? linha.substr(1,7) : linha.substr(0,7));
+                ordem->SetTipoOrdem(2);
+                ordem->SetRobo(numeroRobo);
+                ordem->SetPrioridade(prioridade);
+            }
+        }
+    } else if(linha.find("ELIMINAR") != string::npos) {
+        string numeroRoboStr = prioridade ? VerificaDigitoRobo(linha, 10) : VerificaDigitoRobo(linha, 9);
+        if(VerificaNumero(numeroRoboStr)){
+            int numeroRobo = stoi(numeroRoboStr);
+            if(numeroRobo >= 0 && numeroRobo < 50){
+                ordem->SetTarefa(prioridade ? linha.substr(1,8) : linha.substr(0,8));
+                ordem->SetTipoOrdem(2);
+                ordem->SetRobo(numeroRobo);
+                ordem->SetPrioridade(prioridade);
+            }
+        }
+    }
+
+    return ordem;
 }
-
-
 ListaComando::~ListaComando() {}
