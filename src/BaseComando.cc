@@ -9,6 +9,8 @@ using namespace std;
 BaseComando::BaseComando(FILE *arq_comandos, string nomeArquivo) {
     arquivoComandos = arq_comandos;
     nomeArquivoComando = nomeArquivo;
+    aliensEliminados = 0;
+    recursosColetados = 0;
 }
 
 void BaseComando::DelegaOrdens(Robo* robos, Mapa* mapa){
@@ -63,7 +65,7 @@ void BaseComando::AnalisaComando(string linha, Robo* robos, Mapa* mapa){
     Ordem* ordem = AnalisaOrdem(linha);
     int i = ordem->GetRobo();
     if(ordem->GetTipoOrdem() == 1){
-        robos[i].ProcessaComando(ordem, mapa);
+        robos[i].ProcessaComando(ordem, mapa, this);
     } else {
         if(!ordem->GetPrioridade()){
             robos[i].InsereOrdemSemPrioridade(ordem);
@@ -167,4 +169,25 @@ Ordem* BaseComando::AnalisaOrdem(string linha) {
     }
     return ordem;
 }
+
+void BaseComando::ImprimeRelatorioFinal(){
+     cout << "BASE: TOTAL DE ALIENS " << aliensEliminados << " RECURSOS " << recursosColetados << endl;
+}
+
+int BaseComando::GetAliensEliminados(){
+    return aliensEliminados;
+};
+
+int BaseComando::GetRecursosColetados(){
+    return recursosColetados;
+};
+
+void BaseComando::AdicionaAliensEliminados(){
+    aliensEliminados += 1;
+};
+
+void BaseComando::AdicionaRecursosColetados(){
+    recursosColetados += 1;
+};
+
 BaseComando::~BaseComando() {}

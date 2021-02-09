@@ -1,9 +1,13 @@
-#ifndef ROBO_H
-#define ROBO_H
 
 #include "FilaEncadeada.h"
 #include "Mapa.h"
 #include "Relatorio.h"
+#include "BaseComando.h"
+
+class BaseComando;
+
+#ifndef ROBO_H
+#define ROBO_H
 
 class Robo {
     public:
@@ -18,8 +22,8 @@ class Robo {
         int GetPosicaoLinha();
         int GetPosicaoColuna();
         void ImprimeRobo();
-        void ProcessaComando(Ordem* ordem, Mapa* mapa);
-        void ExecutaComando(Ordem* ordem, Mapa* mapa);
+        void ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base);
+        void ExecutaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base);
         void InsereOrdemSemPrioridade(Ordem* ordem);
         void InsereOrdemComPrioridade(Ordem* ordem);
         void InsereHistorico(Relatorio* relato);
@@ -29,8 +33,8 @@ class Robo {
         Relatorio* DesenfileiraHistorico();
         int GetAliensEliminados();
         int GetRecursosColetados();
-        void adicionaAlienEliminado();
-        void adicionaRecursosColetados();
+        void AdicionaAlienEliminado();
+        void AdicionaRecursosColetados();
 
     private:
         int codigoRobo;

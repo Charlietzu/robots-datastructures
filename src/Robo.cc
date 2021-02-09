@@ -16,7 +16,7 @@ void Robo::ImprimeRobo() {
     printf("Codigo do Robo - %d\n", codigoRobo);
 }
 
-void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa){
+void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
     if(ordem->GetTarefa() == "ATIVAR"){
         if(ativo){
             //Imprimir na saída BASE: ROBO k JA ESTA EM MISSAO
@@ -30,7 +30,7 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa){
         if(ativo){
             while (GetTamanhoFila() > 0){
                 Ordem* o = DesenfileiraExecutaItemFila();
-                ExecutaComando(o, mapa);
+                ExecutaComando(o, mapa, base);
             }
         } else {
             //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
@@ -53,6 +53,9 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa){
             ativo = false;
             //Imprimir na saída BASE: ROBO k RETORNOU ALIENS X RECURSOS y
             cout << "BASE: ROBO " << codigoRobo << " RETORNOU ALIENS " << aliensEliminados << " RECURSOS " << recursosColetados << endl;
+            aliensEliminados = 0;
+            recursosColetados = 0;
+            historico.Limpa();
         }
     }
 }
@@ -87,7 +90,7 @@ Relatorio* Robo::DesenfileiraHistorico(){
 };
 
 
-void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
+void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
 
     Relatorio* r = new Relatorio;
     string relato = ""; 
@@ -108,7 +111,8 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
         int j = posicaoColuna;
 
         if(mapa->GetDadoMapa(i, j) == 'R'){
-            adicionaRecursosColetados();
+            AdicionaRecursosColetados();
+            base->AdicionaRecursosColetados();
             mapa->SetDadoMapa(i, j, '.');
             //Registrar ROBO k: RECURSOS COLETADOS EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": RECURSOS COLETADOS EM (" + to_string(i) + "," + to_string(j) + ")";
@@ -121,7 +125,8 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
         int j = posicaoColuna;
 
         if(mapa->GetDadoMapa(i, j) == 'H'){
-            adicionaAlienEliminado();
+            AdicionaAlienEliminado();
+            base->AdicionaAliensEliminados();
             mapa->SetDadoMapa(i, j, '.');
             //Registrar ROBO k: ALIEN ELIMINADO EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": ALIEN ELIMINADO EM (" + to_string(i) + "," + to_string(j) + ")";
@@ -134,11 +139,18 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
     InsereHistorico(r);
 }
 
-void Robo::adicionaAlienEliminado(){
+void Robo::AdicionaAlienEliminado(){
     aliensEliminados = aliensEliminados + 1;
 };
 
-void Robo::adicionaRecursosColetados() {
+void Robo::AdicionaRecursosColetados() {
     recursosColetados = recursosColetados + 1;
 };
 
+int Robo::GetRecursosColetados(){
+    return recursosColetados;
+}
+
+int Robo::GetAliensEliminados(){
+    return aliensEliminados;
+}

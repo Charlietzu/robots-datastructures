@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
         }
 
         base->DelegaOrdens(robos, mapa);
+        base->ImprimeRelatorioFinal();
 
     }
 

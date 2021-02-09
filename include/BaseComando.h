@@ -11,6 +11,8 @@ class BaseComando {
     private:
         FILE *arquivoComandos;
         string nomeArquivoComando;
+        int aliensEliminados;
+        int recursosColetados;
 
     public:
         BaseComando(FILE *arq_comandos, string nomeArquivo);
@@ -21,6 +23,11 @@ class BaseComando {
         string VerificaDigitoRobo(string linha, int pos);
         string VerificaDigitoColuna(string linha);
         string VerificaDigitoLinha(string linha);
+        int GetAliensEliminados();
+        int GetRecursosColetados();
+        void AdicionaAliensEliminados();
+        void AdicionaRecursosColetados();
+        void ImprimeRelatorioFinal();
         bool VerificaNumero(string str);
 };
 
