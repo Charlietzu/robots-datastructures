@@ -1,32 +1,33 @@
-#include "ListaComando.h"
+#include "BaseComando.h"
+#include "Mapa.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 
-ListaComando::ListaComando(FILE *arq_comandos, string nomeArquivo) {
+BaseComando::BaseComando(FILE *arq_comandos, string nomeArquivo) {
     arquivoComandos = arq_comandos;
     nomeArquivoComando = nomeArquivo;
 }
 
-void ListaComando::DelegaOrdens(Robo* robos){
+void BaseComando::DelegaOrdens(Robo* robos, Mapa* mapa){
     string linha;
     ifstream arquivo;
     arquivo.open(nomeArquivoComando, ios::in);
-    
     while(getline(arquivo, linha)){
-        AnalisaComando(linha, robos);
+        cout << linha << endl;
+        AnalisaComando(linha, robos, mapa);
     }
 }
 
-bool ListaComando::VerificaNumero(string str){
+bool BaseComando::VerificaNumero(string str){
     char *aux;
     strtol(str.c_str(), &aux, 10);
     return *aux == 0;
 }
 
-string ListaComando::VerificaDigitoRobo(string linha, int pos){
+string BaseComando::VerificaDigitoRobo(string linha, int pos){
     string str = "";
     for(int i = pos; i < pos+2; i++){
         if(isdigit(linha[i])){
@@ -36,7 +37,7 @@ string ListaComando::VerificaDigitoRobo(string linha, int pos){
     return str;
 }
 
-string ListaComando::VerificaDigitoColuna(string linha){
+string BaseComando::VerificaDigitoColuna(string linha){
     string str = "";
     int tamanho = linha.length() - 1;
     for(int i = tamanho; i > tamanho - 3; i--){
@@ -47,7 +48,7 @@ string ListaComando::VerificaDigitoColuna(string linha){
     return str;
 }
 
-string ListaComando::VerificaDigitoLinha(string linha){
+string BaseComando::VerificaDigitoLinha(string linha){
     string str = "";
     int tamanho = linha.length() - 3;
     for(int i = tamanho; i > tamanho - 3; i--){
@@ -59,11 +60,11 @@ string ListaComando::VerificaDigitoLinha(string linha){
 }
 
 
-void ListaComando::AnalisaComando(string linha, Robo* robos){
+void BaseComando::AnalisaComando(string linha, Robo* robos, Mapa* mapa){
     Ordem* ordem = AnalisaOrdem(linha);
-
+    ordem->ImprimeOrdem();
     if(ordem->GetTipoOrdem() == 1){
-        robos[ordem->GetRobo()].ProcessaComando(ordem);
+        robos[ordem->GetRobo()].ProcessaComando(ordem, mapa);
     } else {
         if(!ordem->GetPrioridade()){
             robos[ordem->GetRobo()].InsereOrdemSemPrioridade(ordem);
@@ -73,7 +74,7 @@ void ListaComando::AnalisaComando(string linha, Robo* robos){
     }
 }
 
-Ordem* ListaComando::AnalisaOrdem(string linha) {
+Ordem* BaseComando::AnalisaOrdem(string linha) {
     Ordem* ordem = new Ordem();
     if(linha.find("ATIVAR") != string::npos){
         string numeroRoboStr = VerificaDigitoRobo(linha, 7);
@@ -168,4 +169,4 @@ Ordem* ListaComando::AnalisaOrdem(string linha) {
 
     return ordem;
 }
-ListaComando::~ListaComando() {}
+BaseComando::~BaseComando() {}

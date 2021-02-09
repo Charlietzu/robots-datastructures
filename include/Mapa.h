@@ -1,3 +1,5 @@
+#ifndef MAPA_H
+#define MAPA_H
 
 #include <stdio.h>
 #include <iostream>
@@ -17,7 +19,11 @@ class Mapa {
         ~Mapa();
         void DefineTamanhoMapa();
         void AlocaMapa();
+        char** GetMapa();
+        void SetDadoMapa(int linha, int coluna, char dado);
         void PreencheMapa();
         void ImprimeMapa();
 
 };
+
+#endif

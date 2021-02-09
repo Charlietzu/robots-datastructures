@@ -1,8 +1,8 @@
 #ifndef ROBO_H
 #define ROBO_H
 
-
 #include "FilaEncadeada.h"
+#include "Mapa.h"
 
 class Robo {
     public:
@@ -17,8 +17,8 @@ class Robo {
         int GetPosicaoLinha();
         int GetPosicaoColuna();
         void ImprimeRobo();
-        void ProcessaComando(Ordem* ordem);
-        void ExecutaComando(Ordem* ordem);
+        void ProcessaComando(Ordem* ordem, Mapa* mapa);
+        void ExecutaComando(Ordem* ordem, Mapa* mapa);
         void InsereOrdemSemPrioridade(Ordem* ordem);
         void InsereOrdemComPrioridade(Ordem* ordem);
         int GetTamanhoFila();

@@ -46,4 +46,12 @@ void Mapa::ImprimeMapa(){
     }
 }
 
+void Mapa::SetDadoMapa(int linha, int coluna, char dado){
+    mapa[linha][coluna] = dado;
+}
+
+char** Mapa::GetMapa(){
+    return mapa;
+}
+
 Mapa::~Mapa() {}
