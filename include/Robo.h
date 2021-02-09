@@ -21,8 +21,11 @@ class Robo {
         void ExecutaComando(Ordem* ordem, Mapa* mapa);
         void InsereOrdemSemPrioridade(Ordem* ordem);
         void InsereOrdemComPrioridade(Ordem* ordem);
+        void InsereHistorico(Relatorio* relato);
         int GetTamanhoFila();
-        Ordem* RemoveExecutaItemFila();
+        int GetTamanhoHistorico();
+        Ordem* DesenfileiraExecutaItemFila();
+        Relatorio* DesenfileiraHistorico();
         int GetAliensEliminados();
         int GetRecursosColetados();
         void adicionaAlienEliminado();
@@ -33,6 +36,7 @@ class Robo {
         int posicaoColuna;
         int posicaoLinha;
         FilaEncadeada filaComandos;
+        FilaEncadeada historico;
         bool ativo;
         int aliensEliminados;
         int recursosColetados;

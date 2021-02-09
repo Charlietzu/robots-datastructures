@@ -16,7 +16,6 @@ void BaseComando::DelegaOrdens(Robo* robos, Mapa* mapa){
     ifstream arquivo;
     arquivo.open(nomeArquivoComando, ios::in);
     while(getline(arquivo, linha)){
-        cout << linha << endl;
         AnalisaComando(linha, robos, mapa);
     }
 }
@@ -62,14 +61,15 @@ string BaseComando::VerificaDigitoLinha(string linha){
 
 void BaseComando::AnalisaComando(string linha, Robo* robos, Mapa* mapa){
     Ordem* ordem = AnalisaOrdem(linha);
-    ordem->ImprimeOrdem();
+    cout << ordem->GetTarefa() << endl;
+    int i = ordem->GetRobo();
     if(ordem->GetTipoOrdem() == 1){
-        robos[ordem->GetRobo()].ProcessaComando(ordem, mapa);
+        robos[i].ProcessaComando(ordem, mapa);
     } else {
         if(!ordem->GetPrioridade()){
-            robos[ordem->GetRobo()].InsereOrdemSemPrioridade(ordem);
+            robos[i].InsereOrdemSemPrioridade(ordem);
         } else {
-            robos[ordem->GetRobo()].InsereOrdemComPrioridade(ordem);
+            robos[i].InsereOrdemComPrioridade(ordem);
         }
     }
 }
@@ -166,7 +166,7 @@ Ordem* BaseComando::AnalisaOrdem(string linha) {
             }
         }
     }
-
+    ordem->ImprimeOrdem();
     return ordem;
 }
 BaseComando::~BaseComando() {}

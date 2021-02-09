@@ -37,7 +37,7 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa){
     } else if(ordem->GetTarefa() == "EXECUTAR"){
         if(ativo){
             while (GetTamanhoFila() > 0){
-                ExecutaComando(RemoveExecutaItemFila(), mapa);
+                ExecutaComando(DesenfileiraExecutaItemFila(), mapa);
             }
         } else {
             //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
@@ -46,6 +46,11 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa){
 
     } else if(ordem->GetTarefa() == "RELATORIO"){
         //Imprimir histórico DO ROBO K
+        cout << "CHEGUEI NO RELATORIO" << endl;
+        while (GetTamanhoHistorico() > 0){
+            string relato = DesenfileiraHistorico()->GetRelato();
+            cout << relato << endl;
+        }
     } else if(ordem->GetTarefa() == "RETORNAR"){
         if(!ativo){
             //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
@@ -68,26 +73,43 @@ void Robo::InsereOrdemSemPrioridade(Ordem* ordem){
     filaComandos.InsereInicio(ordem);
 }
 
+void Robo::InsereHistorico(Relatorio* relato){
+    historico.EnfileiraHistorico(relato);
+}
+
 int Robo::GetTamanhoFila(){
     return filaComandos.GetTamanho();
 };
 
-Ordem* Robo::RemoveExecutaItemFila(){
+int Robo::GetTamanhoHistorico(){
+    return historico.GetTamanho();
+};
+
+
+Ordem* Robo::DesenfileiraExecutaItemFila(){
     return filaComandos.Desenfileira();
+};
+
+Relatorio* Robo::DesenfileiraHistorico(){
+    return historico.DesenfileiraHistorico();
 };
 
 void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
     char** m = mapa->GetMapa();
+    Relatorio* r = new Relatorio();
+    string relato;
     if(ordem->GetTarefa() == "MOVER"){
         int i = ordem->GetPosicaoLinha();
         int j = ordem->GetPosicaoColuna();
 
         if(m[i][j] == 'O'){
             //Registrar ROBO k: IMPOSSIVEL MOVER PARA (i,j)
+            relato = "ROBO " + to_string(codigoRobo) + ": IMPOSSIVEL MOVER PARA (" + to_string(i) + "," + to_string(j) + ")";
         } else {
             posicaoLinha = i;
             posicaoColuna = j;
             //Registrar ROBO k: MOVEU PARA (i,j)
+            relato = "ROBO " + to_string(codigoRobo) + ": MOVEU PARA (" + to_string(i) + "," + to_string(j) + ")";
         }
     } else if(ordem->GetTarefa() == "COLETAR"){
         int i = posicaoLinha;
@@ -97,8 +119,10 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
             adicionaRecursosColetados();
             mapa->SetDadoMapa(i, j, '.');
             //Registrar ROBO k: RECURSOS COLETADOS EM (i,j)
+            relato = "ROBO " + to_string(codigoRobo) + ": RECURSOS COLETADOS EM (" + to_string(i) + "," + to_string(j) + ")";
         } else {
             //Registrar ROBO k: IMPOSSIVEL COLETAR RECURSOS EM (i,j)
+            relato = "ROBO " + to_string(codigoRobo) + ": IMPOSSIVEL COLETAR RECURSOS EM (" + to_string(i) + "," + to_string(j) + ")";
         }
     } else if(ordem->GetTarefa() == "ELIMINAR"){
         int i = posicaoLinha;
@@ -108,10 +132,14 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
             adicionaAlienEliminado();
             mapa->SetDadoMapa(i, j, '.');
             //Registrar ROBO k: ALIEN ELIMINADO EM (i,j)
+            relato = "ROBO " + to_string(codigoRobo) + ": ALIEN ELIMINADO EM (" + to_string(i) + "," + to_string(j) + ")";
         } else {
-            //Registrar ROBO k: IMPOSSIVEL COLETAR RECURSOS EM (i,j)
+            //Registrar ROBO k: IMPOSSIVEL ELIMINAR ALIEN EM (i,j)
+            relato = "ROBO " + to_string(codigoRobo) + ": IMPOSSIVEL ELIMINAR ALIEN EM (" + to_string(i) + "," + to_string(j) + ")";
         }
-    } 
+    }
+    r->SetRelato(relato);
+    historico.EnfileiraHistorico(r);
 }
 
 void Robo::adicionaAlienEliminado(){

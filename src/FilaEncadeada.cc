@@ -21,6 +21,16 @@ void FilaEncadeada::Enfileira(Ordem* ordem){
     tamanho++;
 }
 
+void FilaEncadeada::EnfileiraHistorico(Relatorio* relato){
+    CelulaFila *novaCelula;
+
+    novaCelula = new CelulaFila();
+    novaCelula->relato = relato;
+    tras->prox = novaCelula;
+    tras = novaCelula;
+    tamanho++;
+}
+
 Ordem* FilaEncadeada::Desenfileira(){
     CelulaFila *celula;
     Ordem* aux;
@@ -30,6 +40,22 @@ Ordem* FilaEncadeada::Desenfileira(){
     }
 
     aux = frente->prox->ordem;
+    celula = frente;
+    frente = frente->prox;
+    delete celula;
+    tamanho--;
+    return aux;
+}
+
+Relatorio* FilaEncadeada::DesenfileiraHistorico(){
+    CelulaFila *celula;
+    Relatorio* aux;
+
+    if(tamanho == 0) {
+        throw "Histórico está vazio!";
+    }
+
+    aux = frente->prox->relato;
     celula = frente;
     frente = frente->prox;
     delete celula;
