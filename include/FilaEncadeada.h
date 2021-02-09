@@ -12,14 +12,14 @@ class FilaEncadeada {
         int GetTamanho();
         bool Vazia();
         void Enfileira(Ordem* ordem);
-        void EnfileiraHistorico(Relatorio* relatorio);
+        void Enfileira(Relatorio* ordem);
         Ordem* Desenfileira();
         Relatorio* DesenfileiraHistorico();
         void Limpa();
         void InsereInicio(Ordem* ordem);
 
     private:
-        int tamanho;
+        int tamanho = 0;
         CelulaFila* frente;
         CelulaFila* tras;
 };

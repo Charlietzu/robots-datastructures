@@ -61,7 +61,6 @@ string BaseComando::VerificaDigitoLinha(string linha){
 
 void BaseComando::AnalisaComando(string linha, Robo* robos, Mapa* mapa){
     Ordem* ordem = AnalisaOrdem(linha);
-    cout << ordem->GetTarefa() << endl;
     int i = ordem->GetRobo();
     if(ordem->GetTipoOrdem() == 1){
         robos[i].ProcessaComando(ordem, mapa);
@@ -166,7 +165,6 @@ Ordem* BaseComando::AnalisaOrdem(string linha) {
             }
         }
     }
-    ordem->ImprimeOrdem();
     return ordem;
 }
 BaseComando::~BaseComando() {}

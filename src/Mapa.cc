@@ -50,6 +50,10 @@ void Mapa::SetDadoMapa(int linha, int coluna, char dado){
     mapa[linha][coluna] = dado;
 }
 
+char Mapa::GetDadoMapa(int i, int j){
+    return mapa[i][j];
+}
+
 char** Mapa::GetMapa(){
     return mapa;
 }

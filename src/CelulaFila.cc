@@ -1,7 +1,7 @@
 #include "CelulaFila.h"
 
 CelulaFila::CelulaFila(){
-    ordem->SetChave(-1);
-    relato->SetChave(-1);
+    ordem = NULL;
+    relato = NULL;
     prox = NULL;
 }

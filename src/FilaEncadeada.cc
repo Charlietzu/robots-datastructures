@@ -1,5 +1,5 @@
 #include "FilaEncadeada.h"
-
+ 
 FilaEncadeada::FilaEncadeada() {
     tamanho = 0;
     frente = new CelulaFila;
@@ -12,8 +12,11 @@ FilaEncadeada::~FilaEncadeada() {
 }
 
 void FilaEncadeada::Enfileira(Ordem* ordem){
+    if(tamanho == 0){
+        frente = new CelulaFila;
+        tras = frente;
+    }
     CelulaFila *novaCelula;
-
     novaCelula = new CelulaFila();
     novaCelula->ordem = ordem;
     tras->prox = novaCelula;
@@ -21,9 +24,12 @@ void FilaEncadeada::Enfileira(Ordem* ordem){
     tamanho++;
 }
 
-void FilaEncadeada::EnfileiraHistorico(Relatorio* relato){
+void FilaEncadeada::Enfileira(Relatorio* relato){
+    if(tamanho == 0){
+        frente = new CelulaFila;
+        tras = frente;
+    }
     CelulaFila *novaCelula;
-
     novaCelula = new CelulaFila();
     novaCelula->relato = relato;
     tras->prox = novaCelula;
@@ -62,7 +68,7 @@ Relatorio* FilaEncadeada::DesenfileiraHistorico(){
     tamanho--;
     return aux;
 }
-
+ 
 void FilaEncadeada::Limpa(){
     CelulaFila *celula;
 

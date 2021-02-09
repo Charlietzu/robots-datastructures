@@ -20,6 +20,7 @@ class Mapa {
         void DefineTamanhoMapa();
         void AlocaMapa();
         char** GetMapa();
+        char GetDadoMapa(int linha, int coluna);
         void SetDadoMapa(int linha, int coluna, char dado);
         void PreencheMapa();
         void ImprimeMapa();

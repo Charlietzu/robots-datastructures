@@ -3,6 +3,7 @@
 
 #include "FilaEncadeada.h"
 #include "Mapa.h"
+#include "Relatorio.h"
 
 class Robo {
     public:
@@ -33,13 +34,13 @@ class Robo {
 
     private:
         int codigoRobo;
-        int posicaoColuna;
-        int posicaoLinha;
+        int posicaoColuna = 0;
+        int posicaoLinha = 0;
         FilaEncadeada filaComandos;
         FilaEncadeada historico;
-        bool ativo;
-        int aliensEliminados;
-        int recursosColetados;
+        bool ativo = false;
+        int aliensEliminados = 0;
+        int recursosColetados = 0;
 };
 
 #endif

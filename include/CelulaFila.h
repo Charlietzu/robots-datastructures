@@ -4,7 +4,6 @@
 #include "Ordem.h"
 #include "Relatorio.h"
 
-
 class CelulaFila {
     public:
         CelulaFila();

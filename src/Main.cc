@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
         Robo* robos = (Robo*)malloc(sizeof(Robo) * 50); 
         for(int i = 0; i < 50; i++){
             robos[i].SetCodigo(i);
+            robos[i].SetAtivo(false);
         }
 
         base->DelegaOrdens(robos, mapa);

@@ -2,7 +2,7 @@
 
 Relatorio::Relatorio(){
     chave = -1;
-    relato = nullptr;
+    relato = "";
 }
 
 Relatorio::Relatorio(int c){
