@@ -22,6 +22,14 @@ int main(int argc, char* argv[]) {
         base->DelegaOrdens(robos, mapa);
         base->ImprimeRelatorioFinal();
 
+        for(int i = 0; i < 50; i++){
+            robos[i].LimpaHistorico();
+            robos[i].LimpaComandos();
+        }
+        free(robos);
+        mapa->LimpaMapa();
+        delete (mapa);
+        delete (base); 
     }
 
     return 0;

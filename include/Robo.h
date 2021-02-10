@@ -32,6 +32,8 @@ class Robo {
         int GetTamanhoHistorico();
         Ordem* DesenfileiraExecutaItemFila();
         Relatorio* DesenfileiraHistorico();
+        void LimpaComandos();
+        void LimpaHistorico();
         int GetAliensEliminados();
         int GetRecursosColetados();
         void AdicionaAlienEliminado();

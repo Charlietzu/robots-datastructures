@@ -8,7 +8,7 @@ FilaEncadeada::FilaEncadeada() {
 
 FilaEncadeada::~FilaEncadeada() {
     Limpa();
-    delete frente;
+    //delete frente;
 }
 
 void FilaEncadeada::Enfileira(Ordem* ordem){
@@ -70,26 +70,30 @@ Relatorio* FilaEncadeada::DesenfileiraHistorico(){
 }
 
 void FilaEncadeada::ImprimeHistorico(){
-    CelulaFila *celula;
+    if(tamanho > 0){
+        CelulaFila *celula;
 
-    celula = frente->prox;
-    while(celula != NULL){
-        cout << celula->relato->GetRelato() << endl;
-        celula = celula->prox;
+        celula = frente->prox;
+        while(celula != NULL){
+            cout << celula->relato->GetRelato() << endl;
+            celula = celula->prox;
+        }
     }
+
 }
  
 void FilaEncadeada::Limpa(){
-    CelulaFila *celula;
-
-    celula = frente->prox;
-    while(celula != NULL){
-        frente->prox = celula->prox;
-        delete celula;
-        celula = frente->prox;
+    CelulaFila* atual = frente;
+    CelulaFila* prox = NULL;
+ 
+    while (atual != NULL) 
+    {
+        prox = atual->prox;
+        delete(atual);
+        atual = prox;
     }
+    frente = NULL;
     tamanho = 0;
-    tras = frente;
 }
 
 int FilaEncadeada::GetTamanho(){

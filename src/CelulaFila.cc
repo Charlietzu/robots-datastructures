@@ -5,3 +5,5 @@ CelulaFila::CelulaFila(){
     relato = NULL;
     prox = NULL;
 }
+
+CelulaFila::~CelulaFila(){}

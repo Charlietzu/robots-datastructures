@@ -58,4 +58,11 @@ char** Mapa::GetMapa(){
     return mapa;
 }
 
+void Mapa::LimpaMapa(){
+    for(int i = 0; i < numLinhas; i++){
+        free(mapa[i]);
+    }
+    free(mapa);
+}
+
 Mapa::~Mapa() {}

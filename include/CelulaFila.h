@@ -7,6 +7,7 @@
 class CelulaFila {
     public:
         CelulaFila();
+        ~CelulaFila();
 
     private:
         Ordem* ordem;

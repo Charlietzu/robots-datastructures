@@ -19,11 +19,9 @@ void Robo::ImprimeRobo() {
 void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
     if(ordem->GetTarefa() == "ATIVAR"){
         if(ativo){
-            //Imprimir na saída BASE: ROBO k JA ESTA EM MISSAO
             cout << "BASE: ROBO " << codigoRobo << " JA ESTA EM MISSAO" << endl;
         } else {
             ativo = true;
-            //Imprimir na saída BASE: ROBO k SAIU EM MISSAO
             cout << "BASE: ROBO " << codigoRobo << " SAIU EM MISSAO" << endl;
         }
     } else if(ordem->GetTarefa() == "EXECUTAR"){
@@ -33,20 +31,13 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base)
                 ExecutaComando(o, mapa);
             }
         } else {
-            //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
             cout << "BASE: ROBO " << codigoRobo << " NAO ESTA EM MISSAO" << endl;
         }
 
     } else if(ordem->GetTarefa() == "RELATORIO"){
-        //Imprimir histórico DO ROBO K
-/*         while (GetTamanhoHistorico() > 0){
-            Relatorio* r = DesenfileiraHistorico();
-            cout << r->GetRelato() << endl;
-        } */
         ImprimeHistorico();
     } else if(ordem->GetTarefa() == "RETORNAR"){
         if(!ativo){
-            //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
             cout << "BASE: ROBO " << codigoRobo << " NAO ESTA EM MISSAO" << endl;
         } else {
             posicaoLinha = 0;
@@ -54,7 +45,6 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base)
             ativo = false;
             base->AdicionaAliensEliminados(aliensEliminados);
             base->AdicionaRecursosColetados(recursosColetados);
-            //Imprimir na saída BASE: ROBO k RETORNOU ALIENS X RECURSOS y
             cout << "BASE: ROBO " << codigoRobo << " RETORNOU ALIENS " << aliensEliminados << " RECURSOS " << recursosColetados << endl;
             aliensEliminados = 0;
             recursosColetados = 0;
@@ -101,12 +91,10 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
         int i = ordem->GetPosicaoLinha();
         int j = ordem->GetPosicaoColuna();
         if(mapa->GetDadoMapa(i, j) == 'O'){
-            //Registrar ROBO k: IMPOSSIVEL MOVER PARA (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": IMPOSSIVEL MOVER PARA (" + to_string(i) + "," + to_string(j) + ")";
         } else {
             posicaoLinha = i;
             posicaoColuna = j;
-            //Registrar ROBO k: MOVEU PARA (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": MOVEU PARA (" + to_string(i) + "," + to_string(j) + ")";
         }
     } else if(ordem->GetTarefa() == "COLETAR"){
@@ -116,10 +104,8 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
         if(mapa->GetDadoMapa(i, j) == 'R'){
             AdicionaRecursosColetados();
             mapa->SetDadoMapa(i, j, '.');
-            //Registrar ROBO k: RECURSOS COLETADOS EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": RECURSOS COLETADOS EM (" + to_string(i) + "," + to_string(j) + ")";
         } else {
-            //Registrar ROBO k: IMPOSSIVEL COLETAR RECURSOS EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": IMPOSSIVEL COLETAR RECURSOS EM (" + to_string(i) + "," + to_string(j) + ")";
         }
     } else if(ordem->GetTarefa() == "ELIMINAR"){
@@ -129,10 +115,8 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
         if(mapa->GetDadoMapa(i, j) == 'H'){
             AdicionaAlienEliminado();
             mapa->SetDadoMapa(i, j, '.');
-            //Registrar ROBO k: ALIEN ELIMINADO EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": ALIEN ELIMINADO EM (" + to_string(i) + "," + to_string(j) + ")";
         } else {
-            //Registrar ROBO k: IMPOSSIVEL ELIMINAR ALIEN EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": IMPOSSIVEL ELIMINAR ALIEN EM (" + to_string(i) + "," + to_string(j) + ")";
         }
     }
@@ -158,4 +142,12 @@ int Robo::GetAliensEliminados(){
 
 void Robo::ImprimeHistorico(){
     historico.ImprimeHistorico();
+}
+
+void Robo::LimpaComandos(){
+    filaComandos.Limpa();
+}
+
+void Robo::LimpaHistorico(){
+    historico.Limpa();
 }
