@@ -30,7 +30,7 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base)
         if(ativo){
             while (GetTamanhoFila() > 0){
                 Ordem* o = DesenfileiraExecutaItemFila();
-                ExecutaComando(o, mapa, base);
+                ExecutaComando(o, mapa);
             }
         } else {
             //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
@@ -51,6 +51,8 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base)
             posicaoLinha = 0;
             posicaoColuna = 0;
             ativo = false;
+            base->AdicionaAliensEliminados(aliensEliminados);
+            base->AdicionaRecursosColetados(recursosColetados);
             //Imprimir na saída BASE: ROBO k RETORNOU ALIENS X RECURSOS y
             cout << "BASE: ROBO " << codigoRobo << " RETORNOU ALIENS " << aliensEliminados << " RECURSOS " << recursosColetados << endl;
             aliensEliminados = 0;
@@ -90,7 +92,7 @@ Relatorio* Robo::DesenfileiraHistorico(){
 };
 
 
-void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
+void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa){
 
     Relatorio* r = new Relatorio;
     string relato = ""; 
@@ -112,7 +114,6 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
 
         if(mapa->GetDadoMapa(i, j) == 'R'){
             AdicionaRecursosColetados();
-            base->AdicionaRecursosColetados();
             mapa->SetDadoMapa(i, j, '.');
             //Registrar ROBO k: RECURSOS COLETADOS EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": RECURSOS COLETADOS EM (" + to_string(i) + "," + to_string(j) + ")";
@@ -126,7 +127,6 @@ void Robo::ExecutaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
 
         if(mapa->GetDadoMapa(i, j) == 'H'){
             AdicionaAlienEliminado();
-            base->AdicionaAliensEliminados();
             mapa->SetDadoMapa(i, j, '.');
             //Registrar ROBO k: ALIEN ELIMINADO EM (i,j)
             relato = "ROBO " + to_string(codigoRobo) + ": ALIEN ELIMINADO EM (" + to_string(i) + "," + to_string(j) + ")";

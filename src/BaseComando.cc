@@ -46,6 +46,12 @@ string BaseComando::VerificaDigitoColuna(string linha){
             str += linha[i];
         }
     }
+    if(str.length() > 1){
+        int n = str.length();
+        for (int i = 0; i < n / 2; i++){
+            swap(str[i], str[n - i - 1]); 
+        }
+    }
     return str;
 }
 
@@ -57,9 +63,14 @@ string BaseComando::VerificaDigitoLinha(string linha){
             str += linha[i];
         }
     }
+    if(str.length() > 1){
+        int n = str.length();
+        for (int i = 0; i < n / 2; i++){
+            swap(str[i], str[n - i - 1]); 
+        }
+    }
     return str;
 }
-
 
 void BaseComando::AnalisaComando(string linha, Robo* robos, Mapa* mapa){
     Ordem* ordem = AnalisaOrdem(linha);
@@ -182,12 +193,12 @@ int BaseComando::GetRecursosColetados(){
     return recursosColetados;
 };
 
-void BaseComando::AdicionaAliensEliminados(){
-    aliensEliminados += 1;
+void BaseComando::AdicionaAliensEliminados(int qtd){
+    aliensEliminados += qtd;
 };
 
-void BaseComando::AdicionaRecursosColetados(){
-    recursosColetados += 1;
+void BaseComando::AdicionaRecursosColetados(int qtd){
+    recursosColetados += qtd;
 };
 
 BaseComando::~BaseComando() {}

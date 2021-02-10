@@ -23,7 +23,7 @@ class Robo {
         int GetPosicaoColuna();
         void ImprimeRobo();
         void ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base);
-        void ExecutaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base);
+        void ExecutaComando(Ordem* ordem, Mapa* mapa);
         void InsereOrdemSemPrioridade(Ordem* ordem);
         void InsereOrdemComPrioridade(Ordem* ordem);
         void InsereHistorico(Relatorio* relato);

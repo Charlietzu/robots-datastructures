@@ -25,8 +25,8 @@ class BaseComando {
         string VerificaDigitoLinha(string linha);
         int GetAliensEliminados();
         int GetRecursosColetados();
-        void AdicionaAliensEliminados();
-        void AdicionaRecursosColetados();
+        void AdicionaAliensEliminados(int qtd);
+        void AdicionaRecursosColetados(int qtd);
         void ImprimeRelatorioFinal();
         bool VerificaNumero(string str);
 };
