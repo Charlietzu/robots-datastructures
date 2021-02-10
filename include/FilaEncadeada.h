@@ -15,6 +15,7 @@ class FilaEncadeada {
         void Enfileira(Relatorio* ordem);
         Ordem* Desenfileira();
         Relatorio* DesenfileiraHistorico();
+        void ImprimeHistorico();
         void Limpa();
         void InsereInicio(Ordem* ordem);
 

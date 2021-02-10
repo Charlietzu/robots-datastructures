@@ -68,6 +68,16 @@ Relatorio* FilaEncadeada::DesenfileiraHistorico(){
     tamanho--;
     return aux;
 }
+
+void FilaEncadeada::ImprimeHistorico(){
+    CelulaFila *celula;
+
+    celula = frente->prox;
+    while(celula != NULL){
+        cout << celula->relato->GetRelato() << endl;
+        celula = celula->prox;
+    }
+}
  
 void FilaEncadeada::Limpa(){
     CelulaFila *celula;

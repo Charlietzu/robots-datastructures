@@ -39,10 +39,11 @@ void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base)
 
     } else if(ordem->GetTarefa() == "RELATORIO"){
         //Imprimir histórico DO ROBO K
-        while (GetTamanhoHistorico() > 0){
+/*         while (GetTamanhoHistorico() > 0){
             Relatorio* r = DesenfileiraHistorico();
             cout << r->GetRelato() << endl;
-        }
+        } */
+        ImprimeHistorico();
     } else if(ordem->GetTarefa() == "RETORNAR"){
         if(!ativo){
             //Imprimir na saída BASE: ROBO k NAO ESTA EM MISSAO
@@ -153,4 +154,8 @@ int Robo::GetRecursosColetados(){
 
 int Robo::GetAliensEliminados(){
     return aliensEliminados;
+}
+
+void Robo::ImprimeHistorico(){
+    historico.ImprimeHistorico();
 }
