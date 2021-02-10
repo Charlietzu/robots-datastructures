@@ -182,7 +182,7 @@ Ordem* BaseComando::AnalisaOrdem(string linha) {
 }
 
 void BaseComando::ImprimeRelatorioFinal(){
-     cout << "BASE: TOTAL DE ALIENS " << aliensEliminados << " RECURSOS " << recursosColetados << endl;
+     cout << "BASE: TOTAL ALIENS " << aliensEliminados << " RECURSOS " << recursosColetados << endl;
 }
 
 int BaseComando::GetAliensEliminados(){
