@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Robo::Robo(){}
+
 Robo::~Robo(){}
 
 void Robo::SetCodigo(int codigo) {

@@ -100,10 +100,6 @@ int FilaEncadeada::GetTamanho(){
     return tamanho;
 }
 
-bool FilaEncadeada::Vazia(){
-    return tamanho == 0;
-}
-
 void FilaEncadeada::InsereInicio(Ordem* ordem) {
     CelulaFila* nova;
 

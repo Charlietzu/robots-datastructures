@@ -69,12 +69,3 @@ int Ordem::GetChave(){
 bool Ordem::GetPrioridade(){
     return prioridade;
 }
-
-void Ordem::ImprimeOrdem(){
-    printf("Ordem para o robo: %d\n", robo);
-    printf("Tipo Ordem: %d\n", tipoOrdem);
-    printf("Posicao da ordem: (%d, %d)\n", posicaoLinha, posicaoColuna);
-    printf("Prioridade da ordem: %s\n", prioridade ? "true" : "false");
-    cout << "Ordem documentada: " << tarefa << endl;
-    cout << endl;
-}

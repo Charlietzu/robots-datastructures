@@ -10,7 +10,6 @@ class FilaEncadeada {
         ~FilaEncadeada();
 
         int GetTamanho();
-        bool Vazia();
         void Enfileira(Ordem* ordem);
         void Enfileira(Relatorio* ordem);
         Ordem* Desenfileira();

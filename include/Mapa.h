@@ -23,7 +23,6 @@ class Mapa {
         char GetDadoMapa(int linha, int coluna);
         void SetDadoMapa(int linha, int coluna, char dado);
         void PreencheMapa();
-        void ImprimeMapa();
         void LimpaMapa();
 
 };

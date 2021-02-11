@@ -37,15 +37,6 @@ void Mapa::PreencheMapa(){
     }
 }
 
-void Mapa::ImprimeMapa(){
-    for(int i = 0; i < numLinhas; i++){
-        for(int j = 0; j < numColunas; j++){
-            printf("%c", mapa[i][j]);
-        }
-        printf("\n");
-    }
-}
-
 void Mapa::SetDadoMapa(int linha, int coluna, char dado){
     mapa[linha][coluna] = dado;
 }

@@ -29,7 +29,6 @@ class Ordem {
         void SetPosicaoColuna(int coluna);
         void SetRobo(int codigoRobo);
         void SetPrioridade(bool valor);
-        void ImprimeOrdem();
 
         string GetTarefa();
         int GetTipoOrdem();
