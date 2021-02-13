@@ -45,10 +45,6 @@ char Mapa::GetDadoMapa(int i, int j){
     return mapa[i][j];
 }
 
-char** Mapa::GetMapa(){
-    return mapa;
-}
-
 void Mapa::LimpaMapa(){
     for(int i = 0; i < numLinhas; i++){
         free(mapa[i]);

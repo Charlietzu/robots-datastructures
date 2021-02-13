@@ -14,10 +14,6 @@ void Robo::SetAtivo(bool valor){
     ativo = valor;
 }
 
-void Robo::ImprimeRobo() {
-    printf("Codigo do Robo - %d\n", codigoRobo);
-}
-
 void Robo::ProcessaComando(Ordem* ordem, Mapa* mapa, BaseComando * const & base){
     if(ordem->GetTarefa() == "ATIVAR"){
         if(ativo){
